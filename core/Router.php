@@ -3,11 +3,11 @@
 namespace app\core;
 
 class Router {
-    private $routes = [];
+    private static $routes = null;
 
-    public function __construct()
+    private static function getRoutes()
     {
         require_once dirname(__DIR__) . "/routes.php";
-        $this->routes = $routes;
+        return $routes;
     }
 }

@@ -4,20 +4,24 @@ namespace app\core;
 
 class Config {
 
-    private $config = [];
+    private static $config = null;
 
-    public function __construct()
+    private static function getConfig()
     {
         require_once dirname(__DIR__) . "/config.php";
-        $this->config = $config;
+        return $config;
     }
 
-    public function get(string $path)
+    public static function get(string $path)
     {
+        if (self::$config === null) {
+            self::$config = self::getConfig();
+        }
+
         $pathParts = explode('/', $path);
         $result = null;
         foreach ($pathParts as $pathPart) {
-            $result = ($result === null) ? $this->config[$pathPart] : $result[$pathPart];
+            $result = ($result === null) ? self::$config[$pathPart] : $result[$pathPart];
         }
         return $result ?? false;
     }
