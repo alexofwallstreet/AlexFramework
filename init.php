@@ -2,6 +2,8 @@
 
 const APP_INIT = 1;
 
+session_start();
+
 spl_autoload_register(function ($class) {
     $prefix = 'app';
     $base_dir = __DIR__;
