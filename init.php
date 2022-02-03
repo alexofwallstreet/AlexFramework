@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+const APP_INIT = 1;
 
 spl_autoload_register(function ($class) {
     $prefix = 'app';

@@ -1,5 +1,9 @@
 <?php
 
+if (!APP_INIT) {
+    die("Application not initialized");
+}
+
 $routes = [
     [
         'condition' => '#^/news/([0-9]+)/([0-9]+)/#',
