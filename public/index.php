@@ -7,3 +7,5 @@ use app\core\Router;
 require_once __DIR__ . '/../init.php';
 
 $app = Application::getInstance();
+$config = Config::getInstance();
+$router = Router::getInstance();

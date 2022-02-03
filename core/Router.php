@@ -2,12 +2,15 @@
 
 namespace app\core;
 
-class Router {
+class Router
+{
+    use SingletonTrait;
+
     private static $routes = null;
 
-    private static function getRoutes()
+    private function __construct()
     {
         require_once dirname(__DIR__) . "/routes.php";
-        return $routes;
+        self::$routes = $routes;
     }
 }
