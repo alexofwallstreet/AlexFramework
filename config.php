@@ -8,5 +8,7 @@ $config = [
     "db" => [
         "login" => "root",
         "password" => ""
-    ]
+    ],
+    "template" => "alex_template",
+    "rootDir" => __DIR__
 ];
