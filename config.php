@@ -5,10 +5,10 @@ if (!APP_INIT) {
 }
 
 $config = [
+    "rootDir" => __DIR__,
     "db" => [
         "login" => "root",
         "password" => ""
     ],
-    "template" => "alex_template",
-    "rootDir" => __DIR__
+    "template" => "alex_template"
 ];

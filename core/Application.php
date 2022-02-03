@@ -12,7 +12,7 @@ class Application
 
     private function __construct()
     {
-
+        $this->pager = Page::getInstance();
     }
 
     private function startBuffer()
@@ -41,16 +41,16 @@ class Application
 
     public function header()
     {
-        self::startBuffer();
-        self::includeTemplateFile("header");
+        $this->startBuffer();
+        $this->includeTemplateFile("header");
     }
 
     public function footer()
     {
-        self::includeTemplateFile("footer");
+        $this->includeTemplateFile("footer");
         $buffer = self::endBuffer();
-        self::restartBuffer();
-        self::outputBuffer($buffer);
+        $this->restartBuffer();
+        $this->outputBuffer($buffer);
     }
 
     private function includeTemplateFile($file)

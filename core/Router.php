@@ -4,8 +4,6 @@ namespace app\core;
 
 class Router
 {
-    use SingletonTrait;
-
     private static $routes = null;
 
     private function __construct()

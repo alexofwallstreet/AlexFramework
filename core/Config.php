@@ -4,11 +4,9 @@ namespace app\core;
 
 class Config
 {
-    use SingletonTrait;
-
     private static $config = null;
 
-    private function __construct()
+    private static function getConfig()
     {
         require_once dirname(__DIR__) . "/config.php";
         self::$config = $config;
@@ -16,6 +14,9 @@ class Config
 
     public static function get(string $path)
     {
+        if (self::$config === null) {
+            self::getConfig();
+        }
         $pathParts = explode('/', $path);
         $result = null;
         foreach ($pathParts as $pathPart) {
