@@ -15,6 +15,20 @@ class Application
         $this->pager = Page::getInstance();
     }
 
+    public function header()
+    {
+        $this->startBuffer();
+        $this->includeTemplateFile("header");
+    }
+
+    public function footer()
+    {
+        $this->includeTemplateFile("footer");
+        $buffer = $this->endBuffer();
+        $this->restartBuffer();
+        $this->outputBuffer($buffer);
+    }
+
     private function startBuffer()
     {
         ob_start();
@@ -39,25 +53,10 @@ class Application
         echo $buffer;
     }
 
-    public function header()
-    {
-        $this->startBuffer();
-        $this->includeTemplateFile("header");
-    }
-
-    public function footer()
-    {
-        $this->includeTemplateFile("footer");
-        $buffer = self::endBuffer();
-        $this->restartBuffer();
-        $this->outputBuffer($buffer);
-    }
-
     private function includeTemplateFile($file)
     {
         $rootDir = Config::get("rootDir");
         $template = Config::get("template");
         include_once $rootDir . "/templates/$template/$file.php";
     }
-
 }
