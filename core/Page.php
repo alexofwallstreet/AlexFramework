@@ -49,10 +49,6 @@ class Page
             return false;
         }
 
-        if (in_array($str, $this->strings)) {
-            return false;
-        }
-
         $this->strings[] = $str;
         return true;
     }
