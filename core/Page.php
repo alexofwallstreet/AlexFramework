@@ -21,11 +21,11 @@ class Page
             return false;
         }
 
-        if (in_array($path, $this->css)) {
+        if (isset($css[$path])) {
             return false;
         }
 
-        $this->css[] = "<link href='$path' rel='stylesheet' />";
+        $this->css[$path] = "<link href='$path' rel='stylesheet' />";
         return true;
     }
 
@@ -35,11 +35,11 @@ class Page
             return false;
         }
 
-        if (in_array($path, $this->js)) {
+        if (isset($js[$path])) {
             return false;
         }
 
-        $this->js[] = "<script src='$path'></script>";
+        $this->js[$path] = "<script src='$path'></script>";
         return true;
     }
 
