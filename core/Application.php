@@ -2,6 +2,8 @@
 
 namespace app\core;
 
+use Cassandra\Varint;
+
 class Application
 {
     use SingletonTrait;
@@ -34,13 +36,10 @@ class Application
         ob_start();
     }
 
-    private function endBuffer()
+    private function endBuffer(): string
     {
         $buffer = ob_get_contents();
-        /*
-         * замена макросов подмены в $buffer
-         */
-        return $buffer;
+        return $this->replaceAllMacros($buffer, $this->pager->getAllReplace());
     }
 
     private function restartBuffer()
@@ -58,5 +57,10 @@ class Application
         $rootDir = Config::get("rootDir");
         $template = Config::get("template");
         include_once $rootDir . "/templates/$template/$file.php";
+    }
+
+    private function replaceAllMacros(string $buffer, array $replaces): string
+    {
+        return str_replace(array_keys($replaces), array_values($replaces), $buffer);
     }
 }
