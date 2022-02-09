@@ -2,19 +2,18 @@
 
 namespace app\core;
 
-use Cassandra\Varint;
-
 class Application
 {
     use SingletonTrait;
 
     private $__components = [];
     private Page $pager;
-    private $template = null;
+    private string $template;
 
     private function __construct()
     {
         $this->pager = Page::getInstance();
+        $this->template = Config::get("template") ?? "default";
     }
 
     public function header()
@@ -55,8 +54,7 @@ class Application
     private function includeTemplateFile($file)
     {
         $rootDir = Config::get("rootDir");
-        $template = Config::get("template");
-        include_once $rootDir . "/templates/$template/$file.php";
+        include_once $rootDir . "/templates/$this->template/$file.php";
     }
 
     private function replaceAllMacros(string $buffer, array $replaces): string
