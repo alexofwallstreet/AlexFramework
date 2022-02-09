@@ -1,10 +1,12 @@
 <?php
 
 use app\core\Application;
+use app\core\Page;
 
 require_once __DIR__ . '/init.php';
 
 $app = Application::getInstance();
+Page::getInstance()->setProperty("title", "Home");
 $app->header();
 ?>
 <pre>
