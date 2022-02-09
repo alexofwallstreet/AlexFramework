@@ -82,7 +82,6 @@ class Page
 
     public function showHead()
     {
-        echo "<meta charset='utf-8'>";
         echo $this->getMacro(self::STRINGS);
         echo $this->getMacro(self::CSS);
         echo $this->getMacro(self::JS);
