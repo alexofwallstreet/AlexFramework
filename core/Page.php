@@ -25,7 +25,7 @@ class Page
             return false;
         }
 
-        $this->css[] = $path;
+        $this->css[] = "<link href='$path' rel='stylesheet' />";
         return true;
     }
 
@@ -39,7 +39,7 @@ class Page
             return false;
         }
 
-        $this->js[] = $path;
+        $this->js[] = "<script src='$path'></script>";
         return true;
     }
 
