@@ -71,9 +71,9 @@ class Page
     public function getAllReplace(): array
     {
         $replaces = [];
-        $replaces[$this->getMacro(self::CSS)] = implode("", $this->css);
-        $replaces[$this->getMacro(self::JS)] = implode("", $this->js);
-        $replaces[$this->getMacro(self::STRINGS)] = implode("", $this->strings);
+        $replaces[$this->getMacro(self::CSS)] = implode("\n", $this->css);
+        $replaces[$this->getMacro(self::JS)] = implode("\n", $this->js);
+        $replaces[$this->getMacro(self::STRINGS)] = implode("\n", $this->strings);
         foreach ($this->properties as $id=>$value) {
             $replaces[$this->getMacro($id)] = $value;
         }
