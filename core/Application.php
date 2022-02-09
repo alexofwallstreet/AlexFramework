@@ -9,7 +9,7 @@ class Application
     use SingletonTrait;
 
     private $__components = [];
-    private $pager = null;
+    private Page $pager;
     private $template = null;
 
     private function __construct()

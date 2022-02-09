@@ -6,15 +6,14 @@ class Page
 {
     use SingletonTrait;
 
-    const CSS = "__css__";
-    const JS = "__js__";
-    const STRINGS = "__strings__";
+    private const CSS = "__css__";
+    private const JS = "__js__";
+    private const STRINGS = "__strings__";
 
     private array $css = [];
     private array $js = [];
     private array $strings = [];
     private array $properties = [];
-    private array $replaces = [];
 
     public function addCss($path): bool
     {
@@ -58,28 +57,31 @@ class Page
         return true;
     }
 
-    public function setProperty(string $id, $value)
+    public function setProperty(string $id, string $value)
     {
         $this->properties[$id] = $value;
-        $this->replaces[$this->getMacro($id)] = $value;
     }
 
     public function getProperty(string $id)
     {
-
+        return $this->properties[$id];
     }
 
     public function showProperty(string $id)
     {
-
+        echo $this->getMacro($id);
     }
 
     public function getAllReplace(): array
     {
-        $this->replaces[$this->getMacro(self::CSS)] = implode("", $this->css);
-        $this->replaces[$this->getMacro(self::JS)] = implode("", $this->js);
-        $this->replaces[$this->getMacro(self::STRINGS)] = implode("", $this->strings);
-        return $this->replaces;
+        $replaces = [];
+        $replaces[$this->getMacro(self::CSS)] = implode("", $this->css);
+        $replaces[$this->getMacro(self::JS)] = implode("", $this->js);
+        $replaces[$this->getMacro(self::STRINGS)] = implode("", $this->strings);
+        foreach ($this->properties as $id=>$value) {
+            $replaces[$this->getMacro($id)] = $value;
+        }
+        return $replaces;
     }
 
     public function showHead()

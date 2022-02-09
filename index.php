@@ -8,8 +8,18 @@ $app = Application::getInstance();
 $app->header();
 ?>
 <pre>
+-------- 09.02.2022 --------
+Класс Page:
+1) методы setProperty(), getProperty(), showProperty() для записи свойств
+2) метод для создания макроса getMacro()
+3) showHead() для подключения css, js и строк в head из любого места
+4) метод getAllReplaces() получения массива для замены макросов
+Класс Application:
+5) метод replaceAllMacros() для замены макросов из буффера
+
 -------- 08.02.2022 --------
 1) добавлены методы addJs, addCss, addString класса Page
+
 -------- 03.02.2022 --------
 1) создан трейт Singleton
 2) добавлена константа ядра

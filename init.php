@@ -1,6 +1,6 @@
 <?php
 
-const APP_INIT = 1;
+const APP_INIT = true;
 
 session_start();
 
