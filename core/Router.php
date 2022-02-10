@@ -2,12 +2,13 @@
 
 namespace app\core;
 
-class Router {
+class Router
+{
     private static $routes = null;
 
-    private static function getRoutes()
+    private function __construct()
     {
         require_once dirname(__DIR__) . "/routes.php";
-        return $routes;
+        self::$routes = $routes;
     }
 }

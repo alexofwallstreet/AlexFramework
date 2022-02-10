@@ -2,22 +2,21 @@
 
 namespace app\core;
 
-class Config {
-
+class Config
+{
     private static $config = null;
 
     private static function getConfig()
     {
         require_once dirname(__DIR__) . "/config.php";
-        return $config;
+        self::$config = $config;
     }
 
     public static function get(string $path)
     {
         if (self::$config === null) {
-            self::$config = self::getConfig();
+            self::getConfig();
         }
-
         $pathParts = explode('/', $path);
         $result = null;
         foreach ($pathParts as $pathPart) {
