@@ -9,11 +9,25 @@ class Application
     private $__components = [];
     private Page $pager;
     private string $template;
+    private Request $request;
+    private Server $server;
 
     private function __construct()
     {
         $this->pager = Page::getInstance();
         $this->template = Config::get("template") ?? "default";
+        $this->request = new Request();
+        $this->server = new Server();
+    }
+
+    public function getRequest(): Request
+    {
+        return $this->request;
+    }
+
+    public function getServer(): Server
+    {
+        return $this->server;
     }
 
     public function header()
