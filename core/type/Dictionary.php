@@ -7,6 +7,16 @@ class Dictionary implements \IteratorAggregate, \ArrayAccess, \Countable
     protected array $container = [];
     protected int $count = 0;
 
+    public function get($key)
+    {
+        return $this->container[$key] ?? null;
+    }
+
+    public function set($key, $value)
+    {
+        $this->container[$key] = $value;
+    }
+
     public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->container);
