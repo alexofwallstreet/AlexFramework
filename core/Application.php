@@ -44,6 +44,25 @@ class Application
         $this->outputBuffer($buffer);
     }
 
+    public function includeComponent(string $component, string $template, array $params)
+    {
+        $componentFile = $this->getComponentPath($component);
+        if (!file_exists($componentFile)) {
+            return false;
+        }
+        if (isset($this->__components[$component])) {
+            $componentClassName = $this->__components[$component];
+        } else {
+            $declaredClassesBefore = get_declared_classes();
+            include_once $componentFile;
+            $declaredClassesAfter = get_declared_classes();
+            $declaredClassesDiff = array_diff($declaredClassesAfter, $declaredClassesBefore);
+            $componentClassName = array_values($declaredClassesDiff)[0];
+            $this->__components[$component] = $componentClassName;
+        }
+        $newComponent = new $componentClassName($component, $template, $params);
+    }
+
     private function startBuffer()
     {
         ob_start();
@@ -74,5 +93,11 @@ class Application
     private function replaceAllMacros(string $buffer, array $replaces): string
     {
         return str_replace(array_keys($replaces), array_values($replaces), $buffer);
+    }
+
+    private function getComponentPath(string $component): string
+    {
+        $componentPath = str_replace(":", "/", $component);
+        return $_SERVER["DOCUMENT_ROOT"]."/components/".$componentPath."/.class.php";
     }
 }

@@ -7,6 +7,18 @@ require_once __DIR__ . '/init.php';
 
 $app = Application::getInstance();
 Page::getInstance()->setProperty("title", "Home");
+
+$app->IncludeComponent(
+    "alex:menu",
+    "bootstrap",
+    Array (
+        "menuItems" => [
+            ["title" => "Home", "url" => "/"],
+            ["title" => "About", "url" => "/about"],
+            ["title" => "Contacts", "url" => "/contacts"],
+        ]
+    )
+);
 $app->header();
 ?>
 <pre>

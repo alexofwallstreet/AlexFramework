@@ -13,8 +13,11 @@ abstract class Base
     public Template $template;
     public string $__path;
 
-    public function __construct()
+    public function __construct($component, $template, $params)
     {
-
+        $this->params = $params;
     }
+
+
+
 }
