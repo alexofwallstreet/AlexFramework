@@ -2,9 +2,9 @@
 
 class MenuComponent extends app\core\component\Base
 {
-
     function executeComponent()
     {
-        // TODO: Implement executeComponent() method.
+        $result = $this->params;
+        $this->template->render("bootstrap", $result);
     }
 }

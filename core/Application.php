@@ -61,6 +61,7 @@ class Application
             $this->__components[$component] = $componentClassName;
         }
         $newComponent = new $componentClassName($component, $template, $params);
+        $newComponent->executeComponent();
     }
 
     private function startBuffer()
