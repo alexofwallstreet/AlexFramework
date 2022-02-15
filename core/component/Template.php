@@ -16,30 +16,41 @@ class Template
     {
         $this->id = $template;
         $this->parentComponent = $component;
-        $this->__relativePath = $this->parentComponent->__path."/templates/$template/";
+        $this->__relativePath = $this->parentComponent->getPath()."/templates/$this->id/";
         $this->__path = $_SERVER["DOCUMENT_ROOT"].$this->__relativePath;
     }
 
-    function render(array $params, array $result, string $page = "template")
+    function render(string $page = "template")
     {
-        //[1] result_modifier.php
-        if (file_exists($this->__path."result_modifier.php")) {
-            include $this->__path."result_modifier.php";
-        }
-        //[2] template.php
-        if (file_exists($this->__path."$page.php")) {
-            include $this->__path."$page.php";
-        }
-        //[3] component_epilog.php
-        if (file_exists($this->__path."component_epilog.php")) {
-            include $this->__path."component_epilog.php";
-        }
-        //styles and js
-        if (file_exists($this->__path."style.css")) {
-            Page::getInstance()->addCss($this->__relativePath."style.css");
-        }
-        if (file_exists($this->__path."script.js")) {
-            Page::getInstance()->addJs($this->__relativePath."script.js");
+        try {
+            $params = $this->parentComponent->getParams();
+            $result = $this->parentComponent->getResult();
+
+            if (file_exists($this->__path."result_modifier.php")) {
+                include $this->__path."result_modifier.php";
+            }
+
+            if (file_exists($this->__path."$page.php")) {
+                include $this->__path."$page.php";
+            } else {
+                throw new \Exception("File $page not found");
+            }
+
+            if (file_exists($this->__path."component_epilog.php")) {
+                include $this->__path."component_epilog.php";
+            }
+
+            if (file_exists($this->__path."style.css")) {
+                Page::getInstance()->addCss($this->__relativePath."style.css");
+            }
+
+            if (file_exists($this->__path."script.js")) {
+                Page::getInstance()->addJs($this->__relativePath."script.js");
+            }
+
+        } catch (\Exception $ex) {
+            echo "Error: ".$ex->getMessage();
         }
     }
+
 }

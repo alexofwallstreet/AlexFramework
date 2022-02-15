@@ -2,6 +2,8 @@
 
 namespace app\core;
 
+use Couchbase\DocumentNotFoundException;
+
 class Application
 {
     use SingletonTrait;
@@ -46,22 +48,31 @@ class Application
 
     public function includeComponent(string $component, string $template, array $params)
     {
-        $componentFile = $this->getComponentPath($component);
-        if (!file_exists($componentFile)) {
+        try {
+            $componentFile = $this->getComponentPath($component);
+            if (!file_exists($componentFile)) {
+                throw new \Exception("File $componentFile not found");
+            }
+            if (isset($this->__components[$component])) {
+                $componentClassName = $this->__components[$component];
+            } else {
+                $declaredClassesBefore = get_declared_classes();
+                include_once $componentFile;
+                $declaredClassesAfter = get_declared_classes();
+                $declaredClassesDiff = array_diff($declaredClassesAfter, $declaredClassesBefore);
+                $componentClassName = array_values($declaredClassesDiff)[0];
+                $this->__components[$component] = $componentClassName;
+            }
+            if (class_exists($componentClassName)) {
+                $newComponent = new $componentClassName($component, $template, $params);
+                return $newComponent->executeComponent();
+            } else {
+                throw new \Exception("Component class not exists");
+            }
+        } catch (\Exception $ex) {
+            echo "Error: ".$ex->getMessage();
             return false;
         }
-        if (isset($this->__components[$component])) {
-            $componentClassName = $this->__components[$component];
-        } else {
-            $declaredClassesBefore = get_declared_classes();
-            include_once $componentFile;
-            $declaredClassesAfter = get_declared_classes();
-            $declaredClassesDiff = array_diff($declaredClassesAfter, $declaredClassesBefore);
-            $componentClassName = array_values($declaredClassesDiff)[0];
-            $this->__components[$component] = $componentClassName;
-        }
-        $newComponent = new $componentClassName($component, $template, $params);
-        return $newComponent->executeComponent();
     }
 
     private function startBuffer()

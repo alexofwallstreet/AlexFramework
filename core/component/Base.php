@@ -6,22 +6,47 @@ abstract class Base
 {
     abstract function executeComponent();
 
-    public string $id;
-    public array $params;
-    public array $result;
+    protected string $id;
+    protected array $params;
+    protected array $result;
 
-    public Template $template;
-    public string $__path;
+    protected Template $template;
+    protected string $__path;
 
     public function __construct($component, $template, $params)
     {
         $this->id = $component;
         $this->params = $params;
-        $this->__path = $this->getPath($component);
+        $this->__path = $this->makePath($component);
         $this->template = new Template($this, $template);
     }
 
-    private function getPath($componentName): string
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getResult(): array
+    {
+        return $this->result;
+    }
+
+    public function getParams(): array
+    {
+        return $this->params;
+    }
+
+    public function getTemplate(): Template
+    {
+        return $this->template;
+    }
+
+    public function getPath(): string
+    {
+        return $this->__path;
+    }
+
+    private function makePath($componentName): string
     {
         return "/components/".str_replace(":", "/", $componentName);
     }
