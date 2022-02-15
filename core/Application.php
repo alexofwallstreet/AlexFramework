@@ -6,7 +6,7 @@ class Application
 {
     use SingletonTrait;
 
-    private $__components = [];
+    private array $__components = [];
     private Page $pager;
     private string $template;
     private Request $request;
@@ -61,7 +61,7 @@ class Application
             $this->__components[$component] = $componentClassName;
         }
         $newComponent = new $componentClassName($component, $template, $params);
-        $newComponent->executeComponent();
+        return $newComponent->executeComponent();
     }
 
     private function startBuffer()

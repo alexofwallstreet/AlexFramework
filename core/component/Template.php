@@ -10,40 +10,36 @@ class Template
     private string $id;
     private string $__path;
     private string $__relativePath;
+    private Base $parentComponent;
 
     public function __construct($component, $template)
     {
-        $this->id = $component;
-        $this->__path = $this->getPath($component);
-        $this->__relativePath = $this->getRelativePath($this->__path, $template);
+        $this->id = $template;
+        $this->parentComponent = $component;
+        $this->__relativePath = $this->parentComponent->__path."/templates/$template/";
+        $this->__path = $_SERVER["DOCUMENT_ROOT"].$this->__relativePath;
     }
 
-    function render(string $page = "template", array $result)
+    function render(array $params, array $result, string $page = "template")
     {
-        if (file_exists($this->__relativePath."result_modifier.php")) {
-            include $this->__relativePath."result_modifier.php";
+        //[1] result_modifier.php
+        if (file_exists($this->__path."result_modifier.php")) {
+            include $this->__path."result_modifier.php";
         }
-        if (file_exists($this->__relativePath."template.php")) {
-            include $this->__relativePath."template.php";
+        //[2] template.php
+        if (file_exists($this->__path."$page.php")) {
+            include $this->__path."$page.php";
         }
-        if (file_exists($this->__relativePath."component_epilog.php")) {
-            include $this->__relativePath."component_epilog.php";
+        //[3] component_epilog.php
+        if (file_exists($this->__path."component_epilog.php")) {
+            include $this->__path."component_epilog.php";
         }
-        if (file_exists($this->__relativePath."style.css")) {
+        //styles and js
+        if (file_exists($this->__path."style.css")) {
             Page::getInstance()->addCss($this->__relativePath."style.css");
         }
-        if (file_exists($this->__relativePath."script.js")) {
+        if (file_exists($this->__path."script.js")) {
             Page::getInstance()->addJs($this->__relativePath."script.js");
         }
-    }
-
-    private function getRelativePath($path, $template): string
-    {
-        return $_SERVER["DOCUMENT_ROOT"].$path."/"."templates/".$template."/";
-    }
-
-    private function getPath($componentName): string
-    {
-        return "/components/".str_replace(":", "/", $componentName);
     }
 }

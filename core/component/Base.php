@@ -18,13 +18,11 @@ abstract class Base
         $this->id = $component;
         $this->params = $params;
         $this->__path = $this->getPath($component);
-        $this->template = new Template($component, $template);
+        $this->template = new Template($this, $template);
     }
 
     private function getPath($componentName): string
     {
         return "/components/".str_replace(":", "/", $componentName);
     }
-
-
 }

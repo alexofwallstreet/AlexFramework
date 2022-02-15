@@ -8,7 +8,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <?php if (!empty($result["menuItems"])):?>
+            <?php if (isset($result["menuItems"])):?>
                 <ul class="navbar-nav mr-auto">
                     <?php foreach ($result["menuItems"] as $item): ?>
                         <li class="nav-item">
