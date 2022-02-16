@@ -50,4 +50,17 @@ abstract class Base
     {
         return "/components/".str_replace(":", "/", $componentName);
     }
+
+    protected function getAttributesString($componentAttributes): string
+    {
+        if (!isset($componentAttributes)) {
+            return "";
+        }
+        $attributes = $this->params["attr"];
+        $attributesHTML = "";
+        foreach ($attributes as $key=>$value) {
+            $attributesHTML .= $key."=\"".$value."\"";
+        }
+        return $attributesHTML;
+    }
 }

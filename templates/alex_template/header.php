@@ -32,7 +32,4 @@ Application::getInstance()->IncludeComponent(
 ?>
 
 <div class="container">
-    <div class="alert alert-success" role="alert">
-        This is header!
-    </div>
 
