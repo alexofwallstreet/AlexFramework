@@ -1,4 +1,6 @@
 <?php
+
+use app\core\Application;
 use app\core\Page;
 ?>
 
@@ -15,6 +17,20 @@ use app\core\Page;
     <title><?php Page::getInstance()->showProperty("title"); ?></title>
 </head>
 <body>
+<?php
+Application::getInstance()->IncludeComponent(
+    "alex:menu",
+    "bootstrap",
+    Array (
+        "menuItems" => [
+            ["title" => "Home", "url" => "/"],
+            ["title" => "About", "url" => "/about"],
+            ["title" => "Contacts", "url" => "/contacts"],
+        ]
+    )
+);
+?>
+
 <div class="container">
     <div class="alert alert-success" role="alert">
         This is header!

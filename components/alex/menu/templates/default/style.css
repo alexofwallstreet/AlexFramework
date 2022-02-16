@@ -1,0 +1,23 @@
+.default__menu {
+    background-color: #DCDCDC;
+    display: flex;
+    width: 100%;
+    min-height: 100px;
+}
+
+.default__menu ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.default__menu li {
+    list-style-type: none;
+}
+
+.default__menu a {
+    text-decoration: none;
+    color: #131313;
+    font-size: 2rem;
+}
