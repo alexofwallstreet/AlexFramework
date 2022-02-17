@@ -2,6 +2,6 @@
 
 <div class="form-group">
     <label><?= $params["title"] ?? "" ?></label>
-    <input type="text" name="<?= $params["name"] ?? "" ?> <?= $result["attributes"] ?? "" ?>"
+    <input type="text" name="<?= $params["name"] ?? "" ?>" <?= $result["attributes"] ?? "" ?>
            placeholder="<?= $params["placeholder"] ?? "" ?>" class="form-control <?= $params["additional_class"] ?? "" ?>">
 </div>

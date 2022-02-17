@@ -1,6 +1,6 @@
 <?php
 
-class FormFieldSelectComponent extends app\core\component\Base
+class FormFieldTextMultipleComponent extends app\core\component\Base
 {
     function executeComponent()
     {

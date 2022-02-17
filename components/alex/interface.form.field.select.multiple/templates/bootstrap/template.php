@@ -4,8 +4,8 @@ if(!defined("APP_INIT") || APP_INIT!==true) die("Application not initialized"); 
 
 <div class="form-group">
     <label><?= $params["title"] ?? "" ?></label>
-    <select name="<?= $params["name"] ?? "" ?>" <?= $result["attributes"] ?? ""?>
-            class="form-select <?= $params["additional_class"] ?? "" ?>">
+    <select name="<?= $params["name"] ?? "" ?>[]" <?= $result["attributes"] ?? ""?>
+            class="form-select <?= $params["additional_class"] ?? "" ?>" multiple>
         <?php if(isset($params["list"])): ?>
         <?php foreach($params["list"] as $option): ?>
             <?php Application::getInstance()->includeComponent(

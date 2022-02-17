@@ -9,6 +9,10 @@ class FormComponent extends app\core\component\Base
     private const TYPE_RADIO = "radio";
     private const TYPE_SELECT = "select";
     private const TYPE_TEXTAREA = "textarea";
+    private const TYPE_TEXT_MULTIPLE = "text.multiple";
+    private const TYPE_CHECKBOX_MULTIPLE = "checkbox.multiple";
+    private const TYPE_SELECT_MULTIPLE = "select.multiple";
+    private const TYPE_SELECT_OPTION = "select.option";
 
     function executeComponent()
     {
