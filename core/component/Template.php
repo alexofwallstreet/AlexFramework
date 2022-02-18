@@ -20,6 +20,11 @@ class Template
         $this->__path = $_SERVER["DOCUMENT_ROOT"].$this->__relativePath;
     }
 
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
     function render(string $page = "template")
     {
         try {
