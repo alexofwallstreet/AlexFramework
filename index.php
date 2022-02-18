@@ -35,7 +35,7 @@ if (!empty($_POST)) {
                 'title' => 'Логин',
                 'type' => 'text',
                 'name' => 'login',
-                'additional_class' => 'form-control-lg',
+                'additional_class' => 'form-control form-control-lg',
                 'placeholder' => 'Введите имя',
                 'attr' => [
                     'required' => ''
@@ -45,7 +45,7 @@ if (!empty($_POST)) {
                 'title' => 'Пароль',
                 'type' => 'password',
                 'name' => 'password',
-                'additional_class' => 'form-control-lg',
+                'additional_class' => 'form-control',
                 'placeholder' => 'Введите пароль',
                 'attr' => [
                     'required' => ''
@@ -55,7 +55,7 @@ if (!empty($_POST)) {
                 'title' => 'Год рождения',
                 'type' => 'number',
                 'name' => 'birth_year',
-                'additional_class' => 'form-control-lg',
+                'additional_class' => 'form-control form-control-lg',
                 'placeholder' => 'Введите год',
                 'attr' => [
                     'min' => '1900',
@@ -67,7 +67,7 @@ if (!empty($_POST)) {
                 'title' => 'Лучшая поисковая система',
                 'type' => 'select',
                 'name' => 'search_engine',
-                'additional_class' => 'form-select-lg',
+                'additional_class' => 'form-select form-select-lg',
                 'attr' => [
                     'size' => '4'
                 ],
@@ -110,7 +110,7 @@ if (!empty($_POST)) {
             [
                 'type' => 'checkbox',
                 'name' => 'remember',
-                'additional_class' => 'border border-primary',
+                'additional_class' => 'form-check-input',
                 'attr' => [
                     'data-id' => '17'
                 ],
@@ -130,9 +130,34 @@ if (!empty($_POST)) {
             ],
 
             [
+                'type' => 'radio',
+                'name' => 'planet',
+                'additional_class' => 'mt-1 form-check-input',
+                'title' => 'Какая планета имеет кольца?',
+                'list' => [
+                    [
+                        'title' => 'Земля',
+                        'value' => 'earth'
+                    ],
+                    [
+                        'title' => 'Марс',
+                        'value' => 'mars'
+                    ],
+                    [
+                        'title' => 'Сатурн',
+                        'value' => 'saturn'
+                    ],
+                    [
+                        'title' => 'Юпитер',
+                        'value' => 'jupiter'
+                    ],
+                ]
+            ],
+
+            [
                 'type' => 'text.multiple',
                 'name' => 'phones',
-                'additional_class' => 'form-control-lg',
+                'additional_class' => 'mt-1 form-control form-control-lg',
                 'title' => 'Ваш номер телефона',
                 'placeholder' => "Введите ваш номер"
             ],
@@ -140,7 +165,7 @@ if (!empty($_POST)) {
             [
                 'type' => 'checkbox.multiple',
                 'name' => 'cities',
-                'additional_class' => 'border border-success',
+                'additional_class' => 'form-check-input border border-success',
                 'title' => 'В каких городах вы хотели бы побывать?',
                 'list' => [
                     [

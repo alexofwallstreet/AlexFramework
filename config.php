@@ -6,5 +6,6 @@ $config = [
         "login" => "root",
         "password" => ""
     ],
-    "template" => "alex_template"
+    "template" => "alex_template",
+    "defaultTemplate" => "default"
 ];

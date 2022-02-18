@@ -1,7 +1,16 @@
 <?php if(!defined("APP_INIT") || APP_INIT!==true) die("Application not initialized"); ?>
 
+<?php
+use app\core\Application;
+use app\core\Config;
+
+?>
+
 <div class="form-group">
-    <label><?= $params["title"] ?? "" ?></label>
-    <input type="checkbox" name="<?= $params["name"] ?? "" ?>" <?= $result["attributes"] ?? "" ?>
-           class="form-check-input <?= $params["additional_class"] ?? "" ?>">
+    <?php
+    Application::getInstance()->includeComponent(
+        "alex:interface.form.field.standard.input",
+        $result["template"] ?? Config::get("defaultTemplate"),
+        $params
+    ) ?>
 </div>

@@ -2,10 +2,15 @@
 
 <?php
 use app\core\Application;
-?>
-<form class="alex_form <?= $params["additional_class"] ?? "" ?>" method="<?= $params["method"] ?? "" ?>"
-      action="<?= $params["action"] ?? "" ?>" <?= $result["attributes"] ?? "" ?>>
+use app\core\Config;
 
+?>
+<form
+      class="alex_form <?= $params["additional_class"] ?? "" ?>"
+      method="<?= $params["method"] ?? "" ?>"
+      action="<?= $params["action"] ?? "" ?>"
+      <?= $result["attributes"] ?? "" ?>
+>
     <h2 class="h2"><?= $params["title"] ?? "" ?></h2>
 
     <?php if(isset($params["elements"])): ?>
@@ -13,10 +18,11 @@ use app\core\Application;
             <?php if(in_array($element["type"], $result["allowedTypes"]))
                 Application::getInstance()->includeComponent(
                     "alex:interface.form.field.{$element["type"]}",
-                    "bootstrap",
+                    $result['template'] ?? Config::get("defaultTemplate"),
                     $element);
             ?>
         <?php endforeach; ?>
     <?php endif; ?>
+
     <button type="submit" class="btn btn-primary w-100">Submit</button>
 </form>

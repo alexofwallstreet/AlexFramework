@@ -18,6 +18,7 @@ class FormComponent extends app\core\component\Base
     {
         $this->result["attributes"] = $this->getAttributesString($this->params["attr"]);
         $this->result["allowedTypes"] = array_values(self::getConstants());
+        $this->result["template"] = $this->template->getId();
         $this->template->render();
     }
 

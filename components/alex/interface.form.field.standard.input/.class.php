@@ -1,6 +1,6 @@
 <?php
 
-class FormFieldCheckboxComponent extends app\core\component\Base
+class FormFieldStandardInputComponent extends app\core\component\Base
 {
     function executeComponent()
     {

@@ -1,7 +1,15 @@
 <?php if(!defined("APP_INIT") || APP_INIT!==true) die("Application not initialized"); ?>
 
+<?php
+use app\core\Application;
+use app\core\Config;
+
+?>
+
 <div class="form-group">
-    <label><?= $params["title"] ?? "" ?></label>
-    <input type="number" name="<?= $params["name"] ?? "" ?>" <?= $result["attributes"] ?? "" ?>
-           placeholder="<?= $params["placeholder"] ?? "" ?>" class="form-control <?= $params["additional_class"] ?? "" ?>">
+    <? Application::getInstance()->includeComponent(
+        "alex:interface.form.field.standard.input",
+        $result["template"] ?? Config::get("defaultTemplate"),
+        $params
+    ) ?>
 </div>
