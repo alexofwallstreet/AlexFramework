@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const btnAddTextInput = e.target;
             const sibling = btnAddTextInput.previousElementSibling;
             if (sibling) {
-                const inputField = sibling.querySelector("input");
+                const inputField = sibling.querySelector("input:last-child");
                 if (inputField && inputField.matches("input[type=text]")) {
                     const newInput = inputField.cloneNode(true);
                     newInput.value = "";
